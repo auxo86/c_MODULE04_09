@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+//因為model來自DAL
 using MODULE04_09.DAL;
 
 namespace MODULE04_09.Controllers
@@ -19,12 +20,13 @@ namespace MODULE04_09.Controllers
         //Get: Home/ProductByID?ID=1
         public ActionResult ProductByID(int id)
         {
+            //NorthwindEntities定義在DAL中
             NorthwindEntities db = new NorthwindEntities();
             var query = from p in db.Products
                         where p.ProductID == id
                         select p;
 
-            //只列第一筆
+            //只列第一筆(事實上上面的語法也只會有一筆)
             var result = query.First();
 
             return View(result);
